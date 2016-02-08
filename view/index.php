@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Books - test task</title>
-</head>
-<body>
-Hello word!
-</body>
-</html>
+<?php require "header.php"; ?>
+
+<h1>Привет, мир!</h1>
+
+<?php require "footer.php"; ?>
