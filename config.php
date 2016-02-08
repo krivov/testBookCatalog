@@ -9,8 +9,8 @@
 return array(
     'database' => array(
         'host' => 'localhost',
-        'database' => 'base',
+        'database' => 'booktest',
         'user' => 'root',
-        'password' => '',
+        'password' => 'root',
     ),
 );

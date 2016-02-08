@@ -10,6 +10,8 @@ include "common.php";
 
 if(isset($_POST['action'])) {
     //@todo doing some action
+} elseif(isset($_GET['page'])) {
+
 } else {
     require "view/index.php";
 }
