@@ -76,8 +76,11 @@ class Source
     /**
      * get all books with page and limit
      */
-    public function getAllBooks($page, $limit) {
-        $query = "SELECT book.* FROM `book`";
+    public function getAllBooks($page = 1, $limit = 10, $order = 'ASC', $field = 'name') {
+
+        $limitFrom = ($page-1)*$limit;
+
+        $query = "SELECT book.* FROM `book` ORDER BY $field $order LIMIT $limitFrom, $limit";
         $res = mysqli_query(Source::$_connection, $query);
 
         $resultArray = array();

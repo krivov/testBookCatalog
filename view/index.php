@@ -1,7 +1,33 @@
 <?php require "header.php"; ?>
 
-<h1>Привет, мир!</h1>
 <div class="container">
+    <h1>Список книг</h1>
+
+    <div class="row">
+        <form class="form-horizontal" role="form" action="/" method="get">
+            <div class="form-group">
+                <label class="col-sm-3 col-sm-offset-6 control-label">Сортировать по:</label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="order_field">
+                        <option value="name" <?php if ($orderField == 'name') echo 'selected' ?>>Наименованию</option>
+                        <option value="date" <?php if ($orderField == 'date') echo 'selected' ?>>Дате</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-3 col-sm-offset-6 control-label">Направление сортировки</label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="order">
+                        <option value="ASC" <?php if ($order == 'ASC') echo 'selected' ?>>По возрастанию</option>
+                        <option value="DESC" <?php if ($order == 'DESC') echo 'selected' ?>>По убывванию</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary col-sm-3 col-sm-offset-9" value="Применить">
+            </div>
+        </form>
+    </div>
     <div class="row">
         <?php foreach($allBooks as $book): /** @var Book $book */ ?>
         <div class="col-lg-4" href="?page=book&id=<?=$book->id?>">
