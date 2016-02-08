@@ -8,16 +8,16 @@
  */
 class Author
 {
-    public $id = NULL;
-    public $firstname = '';
-    public $middlename = '';
-    public $surname = '';
+    public $id;
+    public $firstname;
+    public $middlename;
+    public $surname;
 
     function __construct($array = array())
     {
-        $this->id = !isset($array['id'])? : $array['id'];
-        $this->firstname = !isset($array['firstname'])? : $array['firstname'];
-        $this->lastname = !isset($array['lastname'])? : $array['lastname'];
-        $this->middlename = !isset($array['middlename'])? : $array['middlename'];
+        $this->id = isset($array['id'])? $array['id'] : NULL;
+        $this->firstname = isset($array['firstname'])? $array['firstname'] : NULL;
+        $this->lastname = isset($array['lastname'])? $array['lastname'] : NULL;
+        $this->middlename = isset($array['middlename'])? $array['middlename'] : NULL;
     }
 }

@@ -34,6 +34,8 @@ class Source
             throw new Exception('Error: Unable to connect to MySQL.');
         }
 
+        mysqli_set_charset($connection, "utf8");
+
         self::$_connection = $connection;
         self::$_db = $db;
     }
@@ -75,7 +77,17 @@ class Source
      * get all books with page and limit
      */
     public function getAllBooks($page, $limit) {
+        $query = "SELECT book.* FROM `book`";
+        $res = mysqli_query(Source::$_connection, $query);
 
+        $resultArray = array();
+
+        while($row = mysqli_fetch_array($res))
+        {
+            $resultArray[] = new Book($row);
+        }
+
+        return $resultArray;
     }
 
     /**
