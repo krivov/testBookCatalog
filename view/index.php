@@ -24,6 +24,16 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="inputPassword" class="col-sm-3 col-sm-offset-6 control-label">Количество на странице</label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="limit">
+                        <?php for($i=1;$i<=10;$i++): ?>
+                        <option value="<?=$i*10?>" <?php if ($limit == $i*10) echo 'selected' ?>><?=$i*10?></option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
                 <input type="submit" class="btn btn-primary col-sm-3 col-sm-offset-9" value="Применить">
             </div>
         </form>
