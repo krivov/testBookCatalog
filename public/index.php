@@ -6,7 +6,7 @@
  * Time: 21:55
  */
 
-include "common.php";
+include "../src/common.php";
 
 if(isset($_POST['action'])) {
     //@todo doing some action
