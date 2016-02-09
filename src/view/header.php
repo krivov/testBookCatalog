@@ -18,8 +18,10 @@
 </head>
 <body>
 
-<div class="row">
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="/">Главная</a></li>
-    </ul>
+<div class="container">
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <li><a href="/">Главная</a></li>
+        </ul>
+    </div>
 </div>

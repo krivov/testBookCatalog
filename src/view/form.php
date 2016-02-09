@@ -5,6 +5,8 @@
 /** @var Author[] $authors */
 ?>
 
+<div class="container">
+
 <?php if($book->id):?>
     <h1>Редактирование книги</h1>
 <?php else: ?>
@@ -67,6 +69,8 @@
             <input type="submit" class="btn btn-primary col-sm-2 col-sm-offset-4" value="Сохранить">
         </div>
     </form>
+</div>
+
 </div>
 
 <?php require "footer.php"; ?>

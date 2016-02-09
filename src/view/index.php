@@ -40,17 +40,34 @@
             </div>
         </form>
     </div>
-    <div class="row">
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Дата</th>
+            <th>Изображение</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
         <?php foreach($allBooks as $book): /** @var Book $book */ ?>
-        <div class="col-lg-4">
-            <?php if($book->picture): ?>
-                <img class="img-circle" src="/upload/<?=$book->picture?>" style="width: 140px; height: 140px;">
-            <?php endif ?>
-            <h2><?=htmlspecialchars($book->name)?></h2>
-            <p><a class="btn btn-default" href="?page=book&id=<?=$book->id?>" role="button">Подробнее »</a></p>
-        </div><!-- /.col-lg-4 -->
+            <tr>
+                <td><a href="?page=book&id=<?=$book->id?>"><?=htmlspecialchars($book->name)?></a></td>
+                <td><?php if ($book->date) echo date("d.m.Y", strtotime($book->date)); ?></td>
+                <td>
+                    <?php if($book->picture): ?>
+                        <img class="img-circle" src="/upload/<?=$book->picture?>" style="width: 140px; height: 140px;">
+                    <?php endif ?>
+                </td>
+                <td>
+                    <a href="/?page=addedit&id=<?=$book->id;?>" class="btn btn-primary">Редактировать</a>
+                    <a href="/?page=delete&id=<?=$book->id;?>" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
         <?php endforeach; ?>
-    </div>
+        </tbody>
+    </table>
 </div>
 
 <?php require "footer.php"; ?>
