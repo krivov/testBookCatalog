@@ -6,7 +6,7 @@
 ?>
 
 <div class="container">
-    <h1>Книга: <?=$book->name?></h1>
+    <h1>Книга: <?=htmlspecialchars($book->name)?></h1>
 
     <div class="row">
         <div class="col-lg-12">
@@ -17,7 +17,7 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <?=$book->date?>
+            <?=htmlspecialchars($book->date)?>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
         <div class="col-lg-12">
             <?php foreach($authors as $author):?>
                 <div class="row">
-                    <b><?=$author->lastname?> <?=$author->firstname?> <?=$author->middlename?></b>
+                    <b><?=htmlspecialchars($author->lastname)?> <?=htmlspecialchars($author->firstname)?> <?=htmlspecialchars($author->middlename)?></b>
                 </div>
             <? endforeach; ?>
         </div>

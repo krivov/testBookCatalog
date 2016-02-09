@@ -44,7 +44,7 @@
             <?php if($book->picture): ?>
                 <img class="img-circle" src="/upload/<?=$book->picture?>" style="width: 140px; height: 140px;">
             <?php endif ?>
-            <h2><?=$book->name?></h2>
+            <h2><?=htmlspecialchars($book->name)?></h2>
             <p><a class="btn btn-default" href="?page=book&id=<?=$book->id?>" role="button">Подробнее »</a></p>
         </div><!-- /.col-lg-4 -->
         <?php endforeach; ?>
