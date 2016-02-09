@@ -96,7 +96,8 @@ class Source
     /**
      * get book by ID
      */
-    public function getBook($id) {
+    public function getBook($id)
+    {
 
         $query = "SELECT book.* FROM `book` WHERE book.id = " . (int)$id;
         $res = mysqli_query(Source::$_connection, $query);
@@ -111,29 +112,37 @@ class Source
 
     /**
      * edit book
+     *
+     * @param Book $book
      */
-    public function editBook() {
+    public function editBook(Book $book) {
 
     }
 
     /**
      * add book
+     *
+     * @param Book $book
      */
-    public function addBook() {
+    public function addBook(Book $book) {
 
     }
 
     /**
      * delete book
+     *
+     * @param Book $book
      */
-    public function deleteBook() {
+    public function deleteBook(Book $book)
+    {
 
     }
 
     /**
      * get all authors
      */
-    public function getAllAuthors($idBook = NULL) {
+    public function getAllAuthors($idBook = NULL)
+    {
         $query = "SELECT a.* FROM author AS a";
 
         if ($idBook) {

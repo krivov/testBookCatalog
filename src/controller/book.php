@@ -9,10 +9,10 @@
 $book = NULL;
 if (isset($_GET['id'])) {
     $book = Source::getInstance()->getBook($_GET['id']);
-    $authors = Source::getInstance()->getAllAuthors($book->id);
 }
 
 if ($book) {
+    $book->withAuthors();
     require "view/book.php";
 } else {
     header("Location: /");

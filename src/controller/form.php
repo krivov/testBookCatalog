@@ -6,4 +6,28 @@
  * Time: 15:03
  */
 
+$book = new Book();
+$authors = Source::getInstance()->getAllAuthors();
+
+if (isset($_GET['id'])) {
+    $book = Source::getInstance()->getBook($_GET['id']);
+    if (!$book) {
+        header("Location: /");
+    }
+    $book->withAuthors();
+}
+
+if (isset($_POST['book'])) {
+    if (isset($_GET['id'])) {
+        Source::getInstance()->editBook($book);
+    } else {
+        $book = new Book($_POST['book']);
+        Source::getInstance()->addBook($book);
+    }
+
+    if (count($book->_errors) == 0) {
+        header("Location: /?page=book&id=" . $book->id);
+    }
+}
+
 require "view/form.php";

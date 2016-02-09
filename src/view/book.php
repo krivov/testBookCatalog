@@ -2,7 +2,6 @@
 
 <?php
 /** @var Book $book */
-/** @var Author[] $authors */
 ?>
 
 <div class="container">
@@ -24,7 +23,7 @@
     <h2>Авторы:</h2>
     <div class="row">
         <div class="col-lg-12">
-            <?php foreach($authors as $author):?>
+            <?php foreach($book->authors as $author):?>
                 <div class="row">
                     <b><?=htmlspecialchars($author->lastname)?> <?=htmlspecialchars($author->firstname)?> <?=htmlspecialchars($author->middlename)?></b>
                 </div>
