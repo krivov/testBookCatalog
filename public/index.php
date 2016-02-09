@@ -16,6 +16,9 @@ if(isset($_GET['page'])) {
         case 'addedit':
             include "controller/form.php";
             break;
+        case 'delete':
+            include "controller/delete.php";
+            break;
     }
 } else {
 
