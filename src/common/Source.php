@@ -94,6 +94,22 @@ class Source
     }
 
     /**
+     * get book by ID
+     */
+    public function getBook($id) {
+
+        $query = "SELECT book.* FROM `book` WHERE book.id = " . (int)$id;
+        $res = mysqli_query(Source::$_connection, $query);
+
+        if ($res->num_rows) {
+            $resultArray = mysqli_fetch_array($res);
+            return new Book($resultArray);
+        } else {
+            return NULL;
+        }
+    }
+
+    /**
      * edit book
      */
     public function editBook() {
@@ -112,5 +128,27 @@ class Source
      */
     public function deleteBook() {
 
+    }
+
+    /**
+     * get all authors
+     */
+    public function getAllAuthors($idBook = NULL) {
+        $query = "SELECT a.* FROM author AS a";
+
+        if ($idBook) {
+            $query .= " LEFT JOIN book_author AS ba ON ba.id_author = a.id WHERE ba.id_book = " . (int)$idBook;
+        }
+
+        $res = mysqli_query(Source::$_connection, $query);
+
+        $resultArray = array();
+
+        while($row = mysqli_fetch_array($res))
+        {
+            $resultArray[] = new Author($row);
+        }
+
+        return $resultArray;
     }
 }

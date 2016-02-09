@@ -11,7 +11,24 @@ include "../src/common.php";
 if(isset($_POST['action'])) {
     //@todo doing some action
 } elseif(isset($_GET['page'])) {
+    switch($_GET['page']) {
+        case 'book':
+            $book = NULL;
+            if (isset($_GET['id'])) {
+                $book = Source::getInstance()->getBook($_GET['id']);
+                $authors = Source::getInstance()->getAllAuthors($book->id);
+            }
 
+            if ($book) {
+                require "view/book.php";
+            } else {
+                header("Location: /");
+            }
+            break;
+        case 'addedit':
+            require "view/form.php";
+            break;
+    }
 } else {
 
     //return all books

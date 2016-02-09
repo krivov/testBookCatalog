@@ -40,7 +40,7 @@
     </div>
     <div class="row">
         <?php foreach($allBooks as $book): /** @var Book $book */ ?>
-        <div class="col-lg-4" href="?page=book&id=<?=$book->id?>">
+        <div class="col-lg-4">
             <?php if($book->picture): ?>
                 <img class="img-circle" src="/upload/<?=$book->picture?>" style="width: 140px; height: 140px;">
             <?php endif ?>
