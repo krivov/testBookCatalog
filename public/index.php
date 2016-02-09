@@ -8,9 +8,7 @@
 
 include "../src/common.php";
 
-if(isset($_POST['action'])) {
-    //@todo doing some action
-} elseif(isset($_GET['page'])) {
+if(isset($_GET['page'])) {
     switch($_GET['page']) {
         case 'book':
             include "controller/book.php";

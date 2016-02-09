@@ -3,7 +3,7 @@
 <div class="container">
     <h1>Список книг</h1>
 
-    <a href="/?page=addedit" class="btn-primary">Добавить книгу</a>
+    <a href="/?page=addedit" class="btn btn-primary">Добавить книгу</a>
 
     <div class="row">
         <form class="form-horizontal" role="form" action="/" method="get">

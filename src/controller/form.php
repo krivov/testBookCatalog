@@ -22,7 +22,7 @@ if (isset($_POST['book'])) {
         Source::getInstance()->editBook($book);
     } else {
         $book = new Book($_POST['book']);
-        Source::getInstance()->addBook($book);
+        Source::getInstance()->addBook($book, $_POST['book']['authors']);
     }
 
     if (count($book->_errors) == 0) {

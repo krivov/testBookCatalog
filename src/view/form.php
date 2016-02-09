@@ -12,39 +12,59 @@
 <?php endif?>
 
 <div class="row">
-    <form class="form-horizontal" role="form" action="/index.php?action=addedit" method="post">
+    <form class="form-horizontal" role="form" action="" method="post">
         <div class="form-group">
-            <label class="col-sm-3 col-sm-offset-2 control-label">Наименование:</label>
+            <label class="col-sm-3 col-sm-offset-1 control-label">Наименование:</label>
             <div class="col-sm-3">
                 <input type="text" name="book[name]" value="<?=htmlspecialchars($book->name)?>">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 col-sm-offset-2 control-label">Дата:</label>
+            <label class="col-sm-3 col-sm-offset-1 control-label">Дата:</label>
             <div class="col-sm-3">
-                <input type="text" name="book[name]" value="<?=htmlspecialchars($book->date)?>">
+                <input type="text" name="book[date]" value="<?=htmlspecialchars($book->date)?>">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 col-sm-offset-2 control-label">Авторы:</label>
+            <label class="col-sm-3 col-sm-offset-1 control-label">Картинка:</label>
             <div class="col-sm-3">
-                <select class="form-control">
+                <input type="file" name="book[picture]">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 col-sm-offset-1 control-label">Авторы:</label>
+            <div class="col-sm-3">
+                <ul class="author_list">
+                    <?php foreach($book->authors as $author): ?>
+                    <li>
+                        <b><?=htmlspecialchars($author->lastname)?> <?=htmlspecialchars($author->firstname)?> <?=htmlspecialchars($author->middlename)?></b>
+                        (<a href="javascript:void(0)" class="remove_author">удалить</a>)
+                        <input type="hidden" name="book[authors][]" value="<?=$author->id?>">
+                    </li>
+                    <? endforeach; ?>
+                </ul>
+            </div>
+            <div class="col-sm-3 col-sm-offset-1">
+                <select class="form-control" id="selectAuthor">
                     <?php foreach($authors as $author): ?>
                         <option value="<?=$author->id?>"><?=htmlspecialchars($author->lastname)?> <?=htmlspecialchars($author->firstname)?> <?=htmlspecialchars($author->middlename)?></option>
                     <? endforeach; ?>
                 </select>
-                <a href="javascript:void(0)" class="btn-primary">+</a>
+                <a href="javascript:void(0)" class="btn btn-primary add_author">добавить автора</a>
             </div>
-            <?php foreach($book->authors as $author): ?>
-                <div class="row" data-author="<?=$author->id?>">
-                    <b><?=htmlspecialchars($author->lastname)?> <?=htmlspecialchars($author->firstname)?> <?=htmlspecialchars($author->middlename)?></b>
-                    <a href="javascript:void(0)" class="remove_author">x</a>
-                    <input type="hidden" name="book[author][]" value="<?=$author->id?>">
-                </div>
-            <? endforeach; ?>
+
         </div>
+        <?php if(count($book->_errors) > 0): ?>
+            <div class="form-group">
+                <div class="col-sm-3 col-sm-offset-2">
+                    <?php foreach($book->_errors as $error): ?>
+                        <p class="text-danger"><?=$error?></p>
+                    <? endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
         <div class="form-group">
-            <input type="submit" class="btn btn-primary col-sm-3 col-sm-offset-3" value="Сохранить">
+            <input type="submit" class="btn btn-primary col-sm-2 col-sm-offset-4" value="Сохранить">
         </div>
     </form>
 </div>

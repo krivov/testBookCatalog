@@ -122,10 +122,34 @@ class Source
     /**
      * add book
      *
-     * @param Book $book
+     * @param Book  $book
+     * @param array $authors
+     *
+     * @return Book
      */
-    public function addBook(Book $book) {
+    public function addBook(Book $book, $authors = array()) {
 
+        if ($book->date) {
+            $date = "'".date("Y-m-d", strtotime($book->date))."'";
+        } else {
+            $date = "NULL";
+        }
+
+        $query = "INSERT INTO book (name, date, picture) VALUES ('" . mysqli_real_escape_string(Source::$_connection, $book->name)."', $date, '$book->picture')";
+        $res = mysqli_query(Source::$_connection, $query);
+
+        if ($res) {
+            $book->id = mysqli_insert_id(Source::$_connection);
+
+            if ($authors) {
+                Source::getInstance()->addAuthorsToBook($authors, $book);
+            }
+
+            return $book;
+        } else {
+            $book->_errors[] = "Ошибка при добавлении книги";
+            return $book;
+        }
     }
 
     /**
@@ -135,18 +159,26 @@ class Source
      */
     public function deleteBook(Book $book)
     {
-
+        $queryDelete = "DELETE FROM book WHERE id = " . $book->id;
+        $res = mysqli_query(Source::$_connection, $queryDelete);
     }
 
     /**
      * get all authors
+     *
+     * @param null  $idBook
+     * @param array $authorsArray
+     *
+     * @return Author[]
      */
-    public function getAllAuthors($idBook = NULL)
+    public function getAllAuthors($idBook = NULL, $authorsArray = array())
     {
         $query = "SELECT a.* FROM author AS a";
 
         if ($idBook) {
             $query .= " LEFT JOIN book_author AS ba ON ba.id_author = a.id WHERE ba.id_book = " . (int)$idBook;
+        } elseif(count($authorsArray) > 0) {
+            $query .= " WHERE a.id IN (".implode(',', $authorsArray).")";
         }
 
         $res = mysqli_query(Source::$_connection, $query);
@@ -159,5 +191,32 @@ class Source
         }
 
         return $resultArray;
+    }
+
+    /**
+     * @param      $authorsArray
+     * @param Book $book
+     */
+    public function addAuthorsToBook($authorsArray, Book $book) {
+        $authors = Source::getInstance()->getAllAuthors(NULL, $authorsArray);
+
+        if ($authors) {
+
+            $queryDelete = "DELETE FROM book_author WHERE id_book = " . $book->id;
+            $res = mysqli_query(Source::$_connection, $queryDelete);
+
+            $values = array();
+
+            foreach ($authors as $author) {
+                $values[] = "(" . $book->id . ", " . $author->id . ")";
+            }
+
+            $queryAdd = "INSERT INTO book_author (id_book, id_author) VALUES " . implode(",", $values);
+            $res = mysqli_query(Source::$_connection, $queryAdd);
+
+            if ($res) {
+                $book->authors = $authors;
+            }
+        }
     }
 }
