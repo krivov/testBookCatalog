@@ -113,8 +113,12 @@ class Source
         $res = mysqli_query(Source::$_connection, $query);
 
         if ($res) {
-            if ($array['authors']) {
+            if (isset($array['authors'])) {
                 Source::getInstance()->addAuthorsToBook($array['authors'], $book);
+            }
+
+            if ($book->uploadPicture()) {
+                $this->updateBookPicture($book);
             }
 
             return $book;
@@ -146,10 +150,25 @@ class Source
                 Source::getInstance()->addAuthorsToBook($authors, $book);
             }
 
+            if ($book->uploadPicture()) {
+                $this->updateBookPicture($book);
+            }
+
             return $book;
         } else {
             $book->_errors[] = "Ошибка при добавлении книги";
             return $book;
+        }
+    }
+
+    public function updateBookPicture($book) {
+        $query = "UPDATE book SET picture = '$book->picture' WHERE id = " . $book->id;
+        $res = mysqli_query(Source::$_connection, $query);
+
+        if ($res) {
+            return true;
+        } else {
+            return false;
         }
     }
 

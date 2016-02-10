@@ -13,4 +13,7 @@ return array(
         'user' => 'root',
         'password' => 'root',
     ),
+    'upload' => array(
+        'dir' => realpath(dirname(__FILE__)) . '/../public/upload/'
+    ),
 );

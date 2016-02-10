@@ -14,7 +14,7 @@
 <?php endif?>
 
 <div class="row">
-    <form class="form-horizontal" role="form" action="" method="post">
+    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label class="col-sm-3 col-sm-offset-1 control-label">Наименование:</label>
             <div class="col-sm-3">
@@ -24,13 +24,13 @@
         <div class="form-group">
             <label class="col-sm-3 col-sm-offset-1 control-label">Дата:</label>
             <div class="col-sm-3">
-                <input id="datepicker" type="text" name="book[date]" value="<?=htmlspecialchars($book->date)?>">
+                <input id="datepicker" type="text" name="book[date]" value="<?=date("d.m.Y", strtotime($book->date))?>">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 col-sm-offset-1 control-label">Картинка:</label>
             <div class="col-sm-3">
-                <input type="file" name="book[picture]">
+                <input type="file" name="book_picture">
             </div>
         </div>
         <div class="form-group">

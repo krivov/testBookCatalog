@@ -21,7 +21,7 @@
     <?php if ($book->date): ?>
     <div class="row">
         <div class="col-lg-6">
-            <?=date("d.m.Y", strtotime($book->date))?>
+            Дата выхода: <?=date("d.m.Y", strtotime($book->date))?>
         </div>
     </div>
     <?php endif; ?>
