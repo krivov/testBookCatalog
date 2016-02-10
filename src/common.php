@@ -13,9 +13,8 @@ set_include_path(implode(PATH_SEPARATOR, array(
 )));
 
 include_once "common/Source.php";
+include_once "common/Configs.php";
 include_once "models/Book.php";
 include_once "models/Author.php";
 
-$configs = include "config.php";
-
-Source::setDefaultParams($configs['database']);
+Configs::setConfigs(include "config.php");
