@@ -1,4 +1,4 @@
-<?php require "header.php"; ?>
+<?php require "_header.php"; ?>
 
 <div class="container">
     <h1>Список книг</h1>
@@ -70,4 +70,4 @@
     </table>
 </div>
 
-<?php require "footer.php"; ?>
+<?php require "_footer.php"; ?>

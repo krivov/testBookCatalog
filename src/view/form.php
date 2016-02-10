@@ -1,4 +1,4 @@
-<?php require "header.php"; ?>
+<?php require "_header.php"; ?>
 
 <?php
 /** @var Book $book */
@@ -24,7 +24,7 @@
         <div class="form-group">
             <label class="col-sm-3 col-sm-offset-1 control-label">Дата:</label>
             <div class="col-sm-3">
-                <input type="text" name="book[date]" value="<?=htmlspecialchars($book->date)?>">
+                <input id="datepicker" type="text" name="book[date]" value="<?=htmlspecialchars($book->date)?>">
             </div>
         </div>
         <div class="form-group">
@@ -73,4 +73,4 @@
 
 </div>
 
-<?php require "footer.php"; ?>
+<?php require "_footer.php"; ?>

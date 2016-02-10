@@ -1,4 +1,4 @@
-<?php require "header.php"; ?>
+<?php require "_header.php"; ?>
 
 <?php
 /** @var Book $book */
@@ -38,4 +38,4 @@
     </div>
 </div>
 
-<?php require "footer.php"; ?>
+<?php require "_footer.php"; ?>

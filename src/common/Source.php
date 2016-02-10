@@ -129,7 +129,7 @@ class Source
      */
     public function addBook(Book $book, $authors = array()) {
 
-        if ($book->date) {
+        if ($book->date && preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1]).(0[1-9]|1[0-2]).[0-9]{4}$/",$book->date)) {
             $date = "'".date("Y-m-d", strtotime($book->date))."'";
         } else {
             $date = "NULL";
