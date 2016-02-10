@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
 
 if (isset($_POST['book'])) {
     if (isset($_GET['id'])) {
-        Source::getInstance()->editBook($book);
+        Source::getInstance()->editBook($book, $_POST['book']);
     } else {
         $book = new Book($_POST['book']);
         Source::getInstance()->addBook($book, $_POST['book']['authors']);

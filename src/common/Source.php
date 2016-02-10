@@ -114,9 +114,29 @@ class Source
      * edit book
      *
      * @param Book $book
+     * @param      $array
+     *
+     * @return Book
      */
-    public function editBook(Book $book) {
+    public function editBook(Book $book, $array) {
 
+        $book->fillParams($array);
+
+        $date = $this->getDateForRequest($book->date);
+
+        $query = "UPDATE book SET name = '" . mysqli_real_escape_string(Source::$_connection, $book->name)."', date = $date, picture = '$book->picture' WHERE id = " . $book->id;
+        $res = mysqli_query(Source::$_connection, $query);
+
+        if ($res) {
+            if ($array['authors']) {
+                Source::getInstance()->addAuthorsToBook($array['authors'], $book);
+            }
+
+            return $book;
+        } else {
+            $book->_errors[] = "Ошибка при редактировании книги";
+            return $book;
+        }
     }
 
     /**
@@ -129,11 +149,7 @@ class Source
      */
     public function addBook(Book $book, $authors = array()) {
 
-        if ($book->date && preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1]).(0[1-9]|1[0-2]).[0-9]{4}$/",$book->date)) {
-            $date = "'".date("Y-m-d", strtotime($book->date))."'";
-        } else {
-            $date = "NULL";
-        }
+        $date = $this->getDateForRequest($book->date);
 
         $query = "INSERT INTO book (name, date, picture) VALUES ('" . mysqli_real_escape_string(Source::$_connection, $book->name)."', $date, '$book->picture')";
         $res = mysqli_query(Source::$_connection, $query);
@@ -217,6 +233,14 @@ class Source
             if ($res) {
                 $book->authors = $authors;
             }
+        }
+    }
+
+    protected function getDateForRequest($dateString) {
+        if ($dateString && preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1]).(0[1-9]|1[0-2]).[0-9]{4}$/",$dateString)) {
+            return "'".date("Y-m-d", strtotime($dateString))."'";
+        } else {
+            return "NULL";
         }
     }
 }

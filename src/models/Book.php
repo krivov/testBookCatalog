@@ -34,6 +34,10 @@ class Book
     function __construct($array = array())
     {
         $this->id = isset($array['id'])? $array['id'] : NULL;
+        $this->fillParams($array);
+    }
+
+    public function fillParams($array) {
         $this->name = isset($array['name'])? $array['name'] : '';
         $this->date = isset($array['date'])? $array['date'] : NULL;
         $this->picture = isset($array['picture'])? $array['picture'] : NULL;
@@ -46,9 +50,5 @@ class Book
         }
 
         return $this;
-    }
-
-    public function isValid() {
-        return true;
     }
 }
