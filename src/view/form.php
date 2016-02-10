@@ -30,6 +30,9 @@
         <div class="form-group">
             <label class="col-sm-3 col-sm-offset-1 control-label">Картинка:</label>
             <div class="col-sm-3">
+                <?php if($book->picture): ?>
+                    <img class="img-circle" src="/upload/<?=$book->picture?>" style="width: 140px; height: 140px;">
+                <?php endif ?>
                 <input type="file" name="book_picture">
             </div>
         </div>

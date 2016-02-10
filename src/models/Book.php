@@ -53,7 +53,7 @@ class Book
 
         $size = getimagesize($file['tmp_name']);
 
-        if ($size[0] > 2200 && $size[1] > 2200) {
+        if ($size[0] > 200 && $size[1] > 200) {
             $this->_errors[] = 'Не верный размер загружаемого изображения. Размеры картинки должны быть ограничены 200x200px';
             return false;
         }

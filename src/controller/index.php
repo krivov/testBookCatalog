@@ -7,7 +7,7 @@
  */
 
 $page = isset($_GET['p'])? (int)$_GET['p'] : 1;
-$limit = isset($_GET['limit'])? (int)$_GET['limit'] : 3;
+$limit = isset($_GET['limit'])? (int)$_GET['limit'] : 5;
 $order = (isset($_GET['order']) && $_GET['order'] === 'DESC')?
     $_GET['order'] : 'ASC';
 $orderField = (isset($_GET['order_field']) && $_GET['order_field'] === 'date')?

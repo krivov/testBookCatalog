@@ -7,7 +7,7 @@
 #
 # Адрес: 127.0.0.1 (MySQL 5.6.21)
 # Схема: booktest
-# Время создания: 2016-02-09 07:15:13 +0000
+# Время создания: 2016-02-10 10:15:34 +0000
 # ************************************************************
 
 
@@ -33,6 +33,20 @@ CREATE TABLE `author` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `author` WRITE;
+/*!40000 ALTER TABLE `author` DISABLE KEYS */;
+
+INSERT INTO `author` (`id`, `firstname`, `middlename`, `lastname`)
+VALUES
+	(1,'Сергей','Александрович','Кривов'),
+	(2,'Светлана','Валерьевна','Ласточкина'),
+	(4,'Марина','Станиславна','Тигорская'),
+	(5,'Зинар','Алказарович','Знак'),
+	(6,'Алказар','Карлович','Сила'),
+	(7,'Дмитрий','Сергеевич','Лазарь');
+
+/*!40000 ALTER TABLE `author` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Дамп таблицы book
@@ -45,11 +59,26 @@ CREATE TABLE `book` (
   `name` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `picture` varchar(255) DEFAULT NULL,
-  `date_add` timestamp NULL DEFAULT NULL,
-  `date_edit` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `book` WRITE;
+/*!40000 ALTER TABLE `book` DISABLE KEYS */;
+
+INSERT INTO `book` (`id`, `name`, `date`, `picture`)
+VALUES
+	(2,'книга 2',NULL,''),
+	(3,'книга 3',NULL,NULL),
+	(4,'тут длинное название книги - текст',NULL,''),
+	(7,'Интересная книжка','1986-02-19',''),
+	(8,'Еще одна книжка','1986-02-19','8a71eb37fbcb846539d3e75ef81dcbde.jpeg'),
+	(9,'Супер блокбастер','2016-02-01','fc16522b1ec83d88978ea5acd33afbce.jpeg'),
+	(10,'Читать всем',NULL,NULL),
+	(11,'Книга жизни',NULL,NULL),
+	(12,'Интересно почитать',NULL,NULL);
+
+/*!40000 ALTER TABLE `book` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Дамп таблицы book_author
@@ -59,13 +88,31 @@ DROP TABLE IF EXISTS `book_author`;
 
 CREATE TABLE `book_author` (
   `id_book` int(11) unsigned NOT NULL,
-  `id_author` int(11) unsigned NOT NULL DEFAULT '0',
+  `id_author` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_book`,`id_author`),
   KEY `frn_author` (`id_author`),
   CONSTRAINT `frn_author` FOREIGN KEY (`id_author`) REFERENCES `author` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `frn_book` FOREIGN KEY (`id_book`) REFERENCES `book` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `book_author` WRITE;
+/*!40000 ALTER TABLE `book_author` DISABLE KEYS */;
+
+INSERT INTO `book_author` (`id_book`, `id_author`)
+VALUES
+	(2,1),
+	(2,2),
+	(4,4),
+	(7,4),
+	(8,4),
+	(4,5),
+	(9,5),
+	(7,6),
+	(8,6),
+	(9,6);
+
+/*!40000 ALTER TABLE `book_author` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
