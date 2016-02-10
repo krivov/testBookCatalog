@@ -55,7 +55,15 @@ class Source
      * get count of all books
      */
     public function getBookCount() {
+        $query = "SELECT COUNT(book.id) FROM `book`";
+        $res = mysqli_query(Source::$_connection, $query);
 
+        if ($res) {
+            $result = mysqli_fetch_row($res);
+            return $result[0];
+        } else {
+            return 0;
+        }
     }
 
     /**

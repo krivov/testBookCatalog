@@ -29,8 +29,8 @@
                 <label for="inputPassword" class="col-sm-3 col-sm-offset-6 control-label">Количество на странице</label>
                 <div class="col-sm-3">
                     <select class="form-control" name="limit">
-                        <?php for($i=1;$i<=10;$i++): ?>
-                        <option value="<?=$i*10?>" <?php if ($limit == $i*10) echo 'selected' ?>><?=$i*10?></option>
+                        <?php for($i=5;$i<=100;$i=$i+5): ?>
+                        <option value="<?=$i?>" <?php if ($limit == $i) echo 'selected' ?>><?=$i?></option>
                         <?php endfor; ?>
                     </select>
                 </div>
@@ -68,6 +68,8 @@
         <?php endforeach; ?>
         </tbody>
     </table>
-</div>
 
+    <?php require "_paginator.php"; ?>
+
+</div>
 <?php require "_footer.php"; ?>

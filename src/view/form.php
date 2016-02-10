@@ -24,7 +24,7 @@
         <div class="form-group">
             <label class="col-sm-3 col-sm-offset-1 control-label">Дата:</label>
             <div class="col-sm-3">
-                <input id="datepicker" type="text" name="book[date]" value="<?=date("d.m.Y", strtotime($book->date))?>">
+                <input id="datepicker" type="text" name="book[date]" value="<?=$book->date?date("d.m.Y", strtotime($book->date)):''?>">
             </div>
         </div>
         <div class="form-group">
